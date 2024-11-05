@@ -1,0 +1,22 @@
+# Ignorar todos os arquivos .dsv
+*.dsv
+
+# Ignorar arquivos e pastas comuns
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Ignorar arquivos do Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignorar arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ignorar configurações de ambiente virtual Python
+venv/
+.env/
+__pycache__/
+*.py[cod]

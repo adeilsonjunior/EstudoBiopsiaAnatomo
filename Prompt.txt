@@ -1,0 +1,36 @@
+Aperfeiçõe o código python a seguir, analisando o dataset DataSet.dsv
+
+Este dataset possui, em CO_PA_PROC_ID, todos os códigos que contém BIOPSIA ou BIÓPSIA no nome.
+
+O procedimento 0203020030 possui, em um de seus atributos na tabela unificada de procedimentos, o atributo "Quantidade Máxima de Execução", 
+o número 8 como o máximo de procedimentos que podem ser realizados. 
+
+Preciso que o script apresente:
+
+1 - Quantidade total de linhas no dataset
+2 - Quantidade e percentual de cada agrupamento de CO_PA_DOCORIG
+3 - Dentro de cada agrupamento de CO_PA_DOCORIG, apresente quantidade e percentual de pacientes identificados (CO_PA_CNSPAC diferente de nulo)
+e não identificados
+4 - Identifique quantos pacientes identificados realizaram o procedimento 0201010410 - BIÓPSIA DE PRÓSTATA e também realizaram o exame
+0203020030 - EXAME ANATOMO-PATOLÓGICO PARA CONGELAMENTO / PARAFINA POR PEÇA CIRURGICA OU POR BIOPSIA (EXCETO COLO UTERINO E MAMA)
+e em quais meses fizeram (CO_PA_MVM)
+5 - Como regra de negócio, temos que os pacientes que realizaram um procedimento 0201010410 e um 0203020030 estão regulares.
+Aqueles que realizaram um procedimento 0201010410 e mais de um 0203020030 estão irregulares.
+
+Apresente, então, o percentual de pacientes regulares e irregulares.
+
+6 - Dentre o dataset de pacientes irregulares, os que fizeram um procedimento 0201010410 e algum 0201010569 ou 0201010666 ou 0203020065 devem ser identificados e
+também serão marcados como regularizados.
+
+7 - Finalmente, aqueles que fizeram um procedimento 0201010410 e qualquer um que não seja 0201010569 ou 0201010666 ou 0203020065
+
+
+
+
+
+
+0201010410 - BIÓPSIA DE PRÓSTATA
+0203020030 - EXAME ANATOMO-PATOLÓGICO PARA CONGELAMENTO / PARAFINA POR PEÇA CIRURGICA OU POR BIOPSIA (EXCETO COLO UTERINO E MAMA)
+0201010569 - BIOPSIA/EXERESE DE NÓDULO DE MAMA
+0201010666 - BIOPSIA DO COLO UTERINO
+0203020065 - EXAME ANATOMOPATOLOGICO DE MAMA - BIOPSIA

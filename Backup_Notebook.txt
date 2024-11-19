@@ -1,0 +1,55 @@
+
+
+
+
+
+print("===3. Higienização dos Dados")
+
+
+cns_qtd_proced = dataset_producao_agrupado.groupby('CO_PA_CNSPAC').agg(
+    contagem_CO_PA_PROC_ID=('CO_PA_PROC_ID', 'count')
+).reset_index()
+
+cns_qtd_proced.to_excel('cns_qtd_proced.xlsx', index=False)
+
+print("\nExportado o Dataset com todos os CNS e quantidade de procedimentos de cada CNS (cns_qtd_proced.xlsx) ")
+
+print("\nQuantidade de registros exportados: ", len(cns_qtd_proced))
+
+# Criar datasets com cns cuja contagem de CO_PA_PROC_ID seja maior que 1 e igual a 1
+
+# Criar o dataset secundário onde contagem_CO_PA_PROC_ID > 1
+cns_qtd_proced_maior_1 = cns_qtd_proced[cns_qtd_proced['contagem_CO_PA_PROC_ID'] > 1]
+
+# Exibir a quantidade de registros no dataset secundário
+print(f"\nQuantidade de registros onde contagem_CO_PA_PROC_ID > 1: {len(cns_qtd_proced_maior_1)}")
+
+# Criar o dataset secundário onde contagem_CO_PA_PROC_ID > 1
+cns_qtd_proced_igual_1 = cns_qtd_proced[cns_qtd_proced['contagem_CO_PA_PROC_ID'] == 1]
+
+# Exibir a quantidade de registros no dataset secundário
+print(f"\nQuantidade de registros onde contagem_CO_PA_PROC_ID = 1: {len(cns_qtd_proced_igual_1)}")
+
+cns_qtd_proced_maior_1.to_excel("cns_qtd_proced_maior_1.xlsx", index=False)
+
+cns_qtd_proced_igual_1.to_excel("cns_qtd_proced_igual_1.xlsx", index=False)
+
+print(
+    "Exportado Datasets: cns_qtd_proced_maior_1.xlsx", len(cns_qtd_proced_maior_1), 
+    "registros e cns_qtd_proced_igual_1.xlsx", len(cns_qtd_proced_igual_1), 
+    "registros."
+)
+
+# Filtrar no dataset_producao_agrupado os CO_PA_CNSPAC não nulos que constam em cns_qtd_proced_maior_1
+dataset_filtrado_maior_1 = dataset_producao_agrupado[
+    dataset_producao_agrupado['CO_PA_CNSPAC'].notna() & 
+    dataset_producao_agrupado['CO_PA_CNSPAC'].str.len() >= 15 &
+    dataset_producao_agrupado['CO_PA_CNSPAC'].isin(cns_qtd_proced_maior_1['CO_PA_CNSPAC'])
+]
+
+print(f"\nTotal de registros após filtrar CO_PA_CNSPAC com mais de 1 procedimento e não nulo: {len(dataset_filtrado_maior_1)}")
+
+# Exportar o resultado filtrado para Excel (opcional)
+dataset_filtrado_maior_1.to_excel('dataset_filtrado_maior_1.xlsx', index=False)
+
+print("\nArquivo 'dataset_filtrado_maior_1.xlsx' exportado com sucesso!")
